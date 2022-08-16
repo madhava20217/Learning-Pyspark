@@ -69,6 +69,5 @@ select * from bands left join albums on bands.id = albums.band_id;
 select b.name as band_name, count(a.id) as num_albums 
 from bands as b
 left join albums as a on b.id = a.band_id
-where b.name = 'Deuce'
 group by band_id
-having num_albums = 1;
+having num_albums > 0;
