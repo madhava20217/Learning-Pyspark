@@ -1,0 +1,43 @@
+# Pyspark Notes
+
+- Importing: from pyspark.sql import SparkSession
+- Instantiation: spark = SparkSession.builder.appName('Name').getOrCreate()
+- Reading from CSV: spark.read.csv('name')
+  - Options: spark.read.option('header', 'true').csv('name', inferSchema = True)
+    - Infers schema (data types) from the given data
+    - Header = True does not include the first row in the dataframe and uses it as column names.
+  - Can also use it as spark.read.csv('name', inferSchema = True, header = True)
+- Selection: df_pyspark.select([columns]).show()
+- Showing dataframe: df_pyspark.show()
+- Dtypes: df_pyspark.dtypes
+- Descriptive statistics: df_pyspark.describe().show(), need show because it returns as a dataframe object.
+- Rename columns: df_pyspark.WithColumnsRenamed('Name', 'NewName').show()
+  - Returns a dataframe object, have to show() or assign.
+  - Not an inplace operation, like many others.
+- Dropping na values: pyspark_df.na.drop().show()
+  - Not an inplace operation.
+  - Arguments to drop: how = 'any' and thresh = x
+    - 'how' determines the row will be dropped
+      - 'any': the row will be dropped if any column in na
+      - 'all': the row will be dropped if all columns are na
+    - 'thresh' determines how many columns in the entry should not be na.
+      - Eg. thresh = 2 requires that at least 2 non-null columns be present in the row for it to not be dropped.
+- Filling null values: df_pyspark.na.fill('Missing values').show()
+  - Not an inplace operation, returns a dataframe object.
+    - Arguments:
+      - Missing value inpute: first argument which specifies by what the null values will be filled.
+      - Second value is the columns to be scanned, in a list format.
+    - Eg. df_pyspark.na.fill( 'Missing Values', [ 'Age', 'Experience' ] ).show() : replace na values with 'Missing Values' in 'Age' and 'Experience' columns.
+- Imputer:
+  - Import: from pyspark.ml.feature import Imputer
+  - Instantiation: imputer = Imputer(inputCols: #list#, outputCols: #list#).setStrategy('strategy')
+    - inputCols: columns that need to be imputed, required argument.
+    - outputCols: output columns after imputation, required argument.
+    - strategy: how the na values will be handled
+      - mean
+      - median
+      - mode
+  - Imputation: imputer.fit(df_pyspark).transform(df_pyspark).show()
+    - Two different methods: fit and transform
+    - Returns a dataframe object, needs to be assigned.
+- 
