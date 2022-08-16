@@ -10,6 +10,7 @@
 - Selection: df_pyspark.select([columns]).show()
 - Showing dataframe: df_pyspark.show()
 - Dtypes: df_pyspark.dtypes
+- Print Schema: df_pyspark.printSchema()
 - Descriptive statistics: df_pyspark.describe().show(), need show because it returns as a dataframe object.
 - Rename columns: df_pyspark.WithColumnsRenamed('Name', 'NewName').show()
   - Returns a dataframe object, have to show() or assign.
@@ -47,4 +48,5 @@
   - Can also use: df_pyspark.filter(df_pyspark['column'] condition). **Ensure that the conditions are enclosed in braces while chaining**.
     - Eg. df_pyspark.filter( (df_pyspark['Salary'] < 20000) & (df_pyspark['Age'] < 25)).show()
     - Chain operations using **& or | or ! or ~ operators**, which stand for AND, OR, NOT respectively.
-- 
+- GroupBy and Aggregate Functions:
+  - Testing
