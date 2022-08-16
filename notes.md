@@ -40,4 +40,11 @@
   - Imputation: imputer.fit(df_pyspark).transform(df_pyspark).show()
     - Two different methods: fit and transform
     - Returns a dataframe object, needs to be assigned.
+- Filter operations:
+  - df_pyspark.filter('condition').show()
+    - Returns a dataframe object, have to show() like in many instances before.
+    - Similar to SQL selection.
+  - Can also use: df_pyspark.filter(df_pyspark['column'] condition). **Ensure that the conditions are enclosed in braces while chaining**.
+    - Eg. df_pyspark.filter( (df_pyspark['Salary'] < 20000) & (df_pyspark['Age'] < 25)).show()
+    - Chain operations using **& or | or ! or ~ operators**, which stand for AND, OR, NOT respectively.
 - 
