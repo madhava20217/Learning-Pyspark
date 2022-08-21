@@ -52,4 +52,29 @@
   - GroupBy: df_pyspark.groupBy([list of columns]) {can use other functions as well, like sum()}
     - Returns a dataframe object, have to use .show()
   - Aggregation: something like groupBy but in a different format.
-- Test
+- Machine Learning using PySpark:
+  - Group independent features into a column.
+  - Use a VectorAssembler for that
+    - Import: from pyspark.ml.feature import VectorAssembler
+    - Init: featureassembler = VectorAssembler(inputCols = [list of input columns], outputCol = 'name of output column').
+      - *Cannot use non-keyword initialisation.*
+    - It combines inputCols into a vector as outputCol.
+    - Transformation: featureassembler.transform(dataframe)
+      - **Isn't an inplace operation, returns a dataframe**.
+  - Machine Learning: From the same pyspark.ml.* library
+    - Train-test Split:
+      - Can use randomsplit method of pyspark dataframe:
+        - train_data, test_data = df_pyspark.randomSplit([split ratios])
+    - LinearRegression:
+      - Import: from pyspark.ml.regression import LinearRegression
+      - Init: regressor = LinearRegression(featureCols = 'feature column', labelCol = 'label column')
+      - Fitting: regressor = regressor.fit(data)
+        - Not an inplace operation, have to assign it somewhere.
+      - Coefficients: regressor.coefficients
+        - Will not be initialised for untrained model and will throw an error.
+      - Intercept: regressor.intercept
+      - Predictions:
+        - Get predictions using- pred_results = regressor.evaluate(test_data)
+        - Show predictions: pred_results.predictions.show()
+        - Metrics: pred_results.meanAbsoluteError, pred_results.meanSquaredError, pred_results.rootMeanSquaredError
+    - 
