@@ -49,4 +49,7 @@
     - Eg. df_pyspark.filter( (df_pyspark['Salary'] < 20000) & (df_pyspark['Age'] < 25)).show()
     - Chain operations using **& or | or ! or ~ operators**, which stand for AND, OR, NOT respectively.
 - GroupBy and Aggregate Functions:
-  - Testing
+  - GroupBy: df_pyspark.groupBy([list of columns]) {can use other functions as well, like sum()}
+    - Returns a dataframe object, have to use .show()
+  - Aggregation: something like groupBy but in a different format.
+- Test
