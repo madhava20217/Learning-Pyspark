@@ -77,4 +77,4 @@
         - Get predictions using- pred_results = regressor.evaluate(test_data)
         - Show predictions: pred_results.predictions.show()
         - Metrics: pred_results.meanAbsoluteError, pred_results.meanSquaredError, pred_results.rootMeanSquaredError
-    - 
+  
